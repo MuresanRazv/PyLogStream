@@ -4,7 +4,6 @@ import random
 import shutil
 import time
 from concurrent.futures import ProcessPoolExecutor
-from http import HTTPMethod
 from pathlib import Path
 
 from pylogstream.benchmark.decorators import profile_performance
@@ -14,21 +13,13 @@ from pylogstream.constants import (
     ANOMALY_STATUS_CODES,
     DEFAULT_LINES_TO_GENERATE,
     DEFAULT_OUTPUT_PATH,
+    HTTP_ENDPOINTS,
+    HTTP_METHODS,
     HTTP_REFERERS,
+    HTTP_STATUS_CODES,
     HTTP_USER_AGENTS,
 )
-from pylogstream.generator.anomalies import should_inject_anomaly
-
-# Standard endpoints and status codes for normal traffic
-STANDARD_ENDPOINTS = [
-    b"/api/v1/users",
-    b"/api/v1/products",
-    b"/api/v1/orders",
-    b"/health",
-    b"/index.html",
-]
-STANDARD_STATUS_CODES = [b"200", b"200", b"200", b"201", b"204", b"301", b"304"]
-HTTP_METHODS = [m.value.encode("ascii") for m in HTTPMethod]
+from pylogstream.generator.utils import should_inject_anomaly
 
 
 class LogGeneratorWorker:
@@ -80,23 +71,15 @@ class LogGeneratorWorker:
             e.encode("ascii") if isinstance(e, str) else e for e in ANOMALY_ENDPOINTS
         ]
         anomaly_statuses = [
-            str(s.value).encode("ascii")
-            if hasattr(s, "value")
-            else str(s).encode("ascii")
+            str(s.value).encode("ascii") if hasattr(s, "value") else str(s).encode("ascii")
             for s in ANOMALY_STATUS_CODES
         ]
-        referers = [
-            r.encode("ascii") if isinstance(r, str) else r for r in HTTP_REFERERS
-        ]
-        user_agents = [
-            u.encode("ascii") if isinstance(u, str) else u for u in HTTP_USER_AGENTS
-        ]
+        referers = [r.encode("ascii") if isinstance(r, str) else r for r in HTTP_REFERERS]
+        user_agents = [u.encode("ascii") if isinstance(u, str) else u for u in HTTP_USER_AGENTS]
 
         with self.output_path.open("wb", buffering=2 * 1024 * 1024) as file:
             while lines_written < self.lines_to_generate:
-                batch_count = min(
-                    self.chunk_lines, self.lines_to_generate - lines_written
-                )
+                batch_count = min(self.chunk_lines, self.lines_to_generate - lines_written)
 
                 # Generate attacker identity for the burst
                 attacker_ip = f"10.0.0.{random.randint(1, 255)}".encode("ascii")
@@ -132,8 +115,8 @@ class LogGeneratorWorker:
                                 random.choice(ip_pool),
                                 current_time_bytes,
                                 random.choice(HTTP_METHODS),
-                                random.choice(STANDARD_ENDPOINTS),
-                                random.choice(STANDARD_STATUS_CODES),
+                                random.choice(HTTP_ENDPOINTS),
+                                random.choice(HTTP_STATUS_CODES),
                                 size,
                                 random.choice(referers),
                                 random.choice(user_agents),

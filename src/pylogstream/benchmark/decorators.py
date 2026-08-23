@@ -22,7 +22,6 @@ def _get_resident_memory_mb() -> float:
 
 def profile_performance(
     name: str | None = None,
-    items_attr: str | None = "total_lines",
 ) -> Callable[[Callable[P, R]], Callable[P, R]]:
     """Decorator measuring runtime execution time, peak RAM."""
 
@@ -43,9 +42,7 @@ def profile_performance(
 
                 print(f"\n[{label}] Performance Summary:")
                 print(f"  • Elapsed Time : {elapsed:.4f}s")
-                print(
-                    f"  • Peak RAM RSS : {peak_mem:.2f} MB (Delta: +{mem_diff:.2f} MB)"
-                )
+                print(f"  • Peak RAM RSS : {peak_mem:.2f} MB (Delta: +{mem_diff:.2f} MB)")
                 print()
 
         return wrapper

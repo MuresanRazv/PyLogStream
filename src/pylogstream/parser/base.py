@@ -84,8 +84,7 @@ class BaseParallelProcessor(ABC, Generic[TChunkResult, TFinalReport]):
 
         with ProcessPoolExecutor(max_workers=self.num_workers) as executor:
             futures = [
-                executor.submit(self._execute_worker_task, start, end)
-                for start, end in offsets
+                executor.submit(self._execute_worker_task, start, end) for start, end in offsets
             ]
             results = [f.result() for f in futures]
 

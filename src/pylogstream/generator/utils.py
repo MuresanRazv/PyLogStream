@@ -3,6 +3,7 @@ from collections.abc import Sequence
 from datetime import datetime
 from http import HTTPStatus
 
+from pylogstream.constants import ANOMALY_PROBABILITY
 from pylogstream.models.logs import WeightedHTTPStatus
 
 HTTP_STATUS_WEIGHTS: Sequence[WeightedHTTPStatus] = [
@@ -34,3 +35,16 @@ def generate_nginx_timestamp(date: datetime) -> bytes:
     Example: 10/Oct/2000:13:55:36 -0700
     """
     return date.strftime("%d/%b/%Y:%H:%M:%S %z").encode("ascii")
+
+
+def should_inject_anomaly() -> bool:
+    """
+    Determines whether to inject an anomaly based on the given probability.
+
+    Args:
+        anomaly_probability (float): The probability of injecting an anomaly
+
+    Returns:
+        bool: True if an anomaly should be injected, False otherwise.
+    """
+    return random.random() < ANOMALY_PROBABILITY

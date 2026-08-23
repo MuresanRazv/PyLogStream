@@ -1,5 +1,7 @@
-from http import HTTPStatus
+from http import HTTPMethod, HTTPStatus
 
+HTTP_STATUS_CODES = [b"200", b"200", b"200", b"201", b"204", b"301", b"304"]
+HTTP_METHODS = [m.value.encode("ascii") for m in HTTPMethod]
 HTTP_ENDPOINTS: tuple[bytes, ...] = (
     b"/wp-admin",
     b"/wp-login",
