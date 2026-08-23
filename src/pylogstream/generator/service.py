@@ -10,6 +10,7 @@ from pylogstream.benchmark.decorators import profile_performance
 from pylogstream.constants import (
     ANOMALY_BATCH_SIZE,
     ANOMALY_ENDPOINTS,
+    ANOMALY_PROBABILITY,
     ANOMALY_STATUS_CODES,
     DEFAULT_LINES_TO_GENERATE,
     DEFAULT_OUTPUT_PATH,
@@ -19,7 +20,6 @@ from pylogstream.constants import (
     HTTP_STATUS_CODES,
     HTTP_USER_AGENTS,
 )
-from pylogstream.generator.utils import should_inject_anomaly
 
 
 class LogGeneratorWorker:
@@ -57,6 +57,18 @@ class LogGeneratorWorker:
             ua,
         )
 
+    def _should_inject_anomaly(self) -> bool:
+        """
+        Determines whether to inject an anomaly based on the given probability.
+
+        Args:
+            anomaly_probability (float): The probability of injecting an anomaly
+
+        Returns:
+            bool: True if an anomaly should be injected, False otherwise.
+        """
+        return random.random() < ANOMALY_PROBABILITY
+
     def generate(self) -> Path:
         """Worker process that writes raw pre-encoded bytes directly to disk."""
         current_time_bytes = time.strftime("%d/%b/%Y:%H:%M:%S +0000").encode("ascii")
@@ -90,7 +102,7 @@ class LogGeneratorWorker:
                 attacker_ua = random.choice(user_agents)
 
                 for _ in range(batch_count):
-                    if anomaly_lines_to_buffer == 0 and should_inject_anomaly():
+                    if anomaly_lines_to_buffer == 0 and self._should_inject_anomaly():
                         anomaly_lines_to_buffer = ANOMALY_BATCH_SIZE
 
                     if anomaly_lines_to_buffer > 0:
