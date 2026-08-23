@@ -14,25 +14,23 @@ HTTP_STATUS_WEIGHTS: Sequence[WeightedHTTPStatus] = [
 ]
 
 
-def get_weighted_random_http_status() -> HTTPStatus:
+def get_weighted_random_http_status() -> bytes:
     """
     Returns a random HTTP status code based on the defined weights.
     """
     statuses = [status.status for status in HTTP_STATUS_WEIGHTS]
     weights = [status.weight for status in HTTP_STATUS_WEIGHTS]
-    return random.choices(statuses, weights=weights, k=1)[0]
+    return random.choices(statuses, weights=weights, k=1)[0].value.to_bytes(3, "big")
 
 
-def generate_ipv4_address() -> str:
-    """
-    Generates a random IPv4 address.
-    """
-    return ".".join(str(random.randint(0, 255)) for _ in range(4))
+def pre_generate_ipv4_address() -> Sequence[bytes]:
+    """Pre-generates a fixed pool of IP addresses."""
+    return [f"192.168.1.{i}".encode("ascii") for i in range(1, 255)]
 
 
-def generate_nginx_timestamp(date: datetime) -> str:
+def generate_nginx_timestamp(date: datetime) -> bytes:
     """
     Generates a timestamp in the Nginx log format.
     Example: 10/Oct/2000:13:55:36 -0700
     """
-    return date.strftime("%d/%b/%Y:%H:%M:%S %z")
+    return date.strftime("%d/%b/%Y:%H:%M:%S %z").encode("ascii")
