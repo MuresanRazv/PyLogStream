@@ -3,7 +3,7 @@ from collections.abc import Sequence
 from datetime import datetime
 from http import HTTPStatus
 
-from log_pipeline.generator.models import WeightedHTTPStatus
+from log_pipeline.models.logs import WeightedHTTPStatus
 
 HTTP_STATUS_WEIGHTS: Sequence[WeightedHTTPStatus] = [
     WeightedHTTPStatus(HTTPStatus.OK, 0.8),

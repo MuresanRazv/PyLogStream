@@ -5,11 +5,11 @@ from http import HTTPMethod
 import pytz
 
 from log_pipeline.generator.constants import ANOMALY_ENDPOINTS
-from log_pipeline.generator.models import LogLine
 from log_pipeline.generator.utils import (
     generate_ipv4_address,
     get_weighted_random_http_status,
 )
+from log_pipeline.models.logs import LogLine
 
 
 def generate_log_line() -> LogLine:

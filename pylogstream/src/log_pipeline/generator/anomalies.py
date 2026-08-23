@@ -6,7 +6,7 @@ from log_pipeline.generator.constants import (
     ANOMALY_PROBABILITY,
     ANOMALY_STATUS_CODES,
 )
-from log_pipeline.generator.models import LogLine
+from log_pipeline.models.logs import LogLine
 
 
 def should_inject_anomaly() -> bool:
