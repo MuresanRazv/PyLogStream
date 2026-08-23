@@ -3,6 +3,7 @@ from collections.abc import Iterator
 from http import HTTPMethod, HTTPStatus
 from pathlib import Path
 
+from log_pipeline.benchmark.decorators import profile_performance
 from log_pipeline.models.logs import LogLine
 from log_pipeline.parser.utils import parse_timestamp
 
@@ -49,6 +50,7 @@ class LogParser:
         except (ValueError, KeyError) as e:
             raise LogParseError(f"Error parsing log line fields: {e}") from e
 
+    @profile_performance(name="Log Parsing")
     def parse_file(self, file_path: str) -> Iterator[LogLine]:
         """Yield parsed LogEntry instances line-by-line from a log file."""
         path = Path(file_path)

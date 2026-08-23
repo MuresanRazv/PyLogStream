@@ -1,6 +1,7 @@
 import argparse
 from pathlib import Path
 
+from log_pipeline.benchmark.decorators import profile_performance
 from log_pipeline.generator.anomalies import (
     inject_anomaly,
     should_inject_anomaly,
@@ -30,6 +31,7 @@ class LogGenerator:
             file.writelines(buffer)
             buffer.clear()
 
+    @profile_performance(name="Log Generation")
     def generate(self) -> None:
         self.output_path.parent.mkdir(parents=True, exist_ok=True)
 

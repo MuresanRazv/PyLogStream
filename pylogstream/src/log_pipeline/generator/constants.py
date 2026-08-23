@@ -29,5 +29,5 @@ ANOMALY_ENDPOINTS = [
     HTTPEndpoint.DOWNLOAD,
 ]
 
-DEFAULT_LINES_TO_GENERATE = 1_000  # Number of log lines to generate
+DEFAULT_LINES_TO_GENERATE = 1_000_000  # Number of log lines to generate
 DEFAULT_OUTPUT_PATH = "logs.txt"  # Default output file path

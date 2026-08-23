@@ -3,6 +3,7 @@ from collections.abc import Iterable
 from http import HTTPStatus
 
 from log_pipeline.analyzer.models import MetricsReport, SuspiciousActivity
+from log_pipeline.benchmark.decorators import profile_performance
 from log_pipeline.models.logs import LogLine
 
 
@@ -15,6 +16,7 @@ class LogsAnalyzer:
         self.brute_force_threshold = brute_force_threshold
         self.rate_limit_threshold = rate_limit_threshold
 
+    @profile_performance(name="Stream Analysis")
     def analyze(self, entries: Iterable[LogLine]) -> MetricsReport:
         report = MetricsReport()
         failed_auth_per_ip: Counter[str] = Counter()
