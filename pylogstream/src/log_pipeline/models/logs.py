@@ -1,6 +1,7 @@
 import datetime
 from dataclasses import dataclass
 from http import HTTPMethod, HTTPStatus
+from typing import NamedTuple
 
 
 @dataclass(frozen=True, slots=True)
@@ -30,3 +31,12 @@ class LogLine:
             f"{self.http_status.value} {self.response_size} "
             f'"{self.referer}" "{self.user_agent}"\n'
         )
+
+
+class LightweightLine(NamedTuple):
+    ip: bytes
+    timestamp: bytes
+    method: bytes
+    endpoint: bytes
+    status: int
+    size: int

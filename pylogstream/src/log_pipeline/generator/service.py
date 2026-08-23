@@ -159,9 +159,7 @@ class LogGenerator:
         self.output_path = Path(output_path)
         self.num_workers = num_workers or (os.cpu_count() or 4)
 
-    @profile_performance(
-        name="Parallel Binary Log Generation", items_attr="total_lines"
-    )
+    @profile_performance(name="Parallel Binary Log Generation")
     def generate(self) -> None:
         self.output_path.parent.mkdir(parents=True, exist_ok=True)
         temp_dir = self.output_path.parent / "_chunks"
