@@ -20,7 +20,9 @@ classifiers = [
     "Operating System :: POSIX :: Linux",
     "Operating System :: MacOS",
 ]
-dependencies = []
+dependencies = [
+    "pydantic-settings>=2.15.0",
+]
 
 [project.optional-dependencies]
 dev = [

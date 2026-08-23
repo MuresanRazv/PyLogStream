@@ -7,19 +7,20 @@ from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 
 from pylogstream.benchmark.decorators import profile_performance
+from pylogstream.config import get_settings
 from pylogstream.constants import (
     ANOMALY_BATCH_SIZE,
     ANOMALY_ENDPOINTS,
     ANOMALY_PROBABILITY,
     ANOMALY_STATUS_CODES,
-    DEFAULT_LINES_TO_GENERATE,
-    DEFAULT_OUTPUT_PATH,
     HTTP_ENDPOINTS,
     HTTP_METHODS,
     HTTP_REFERERS,
     HTTP_STATUS_CODES,
     HTTP_USER_AGENTS,
 )
+
+settings = get_settings()
 
 
 class LogGeneratorWorker:
@@ -146,8 +147,8 @@ class LogGeneratorWorker:
 class LogGenerator:
     def __init__(
         self,
-        total_lines: int = DEFAULT_LINES_TO_GENERATE,
-        output_path: Path | str = DEFAULT_OUTPUT_PATH,
+        total_lines: int = settings.default_lines_to_generate,
+        output_path: Path | str = settings.default_output_path,
         num_workers: int | None = None,
     ) -> None:
         self.total_lines = total_lines
@@ -198,14 +199,14 @@ def main() -> None:
     parser.add_argument(
         "--lines",
         type=int,
-        default=DEFAULT_LINES_TO_GENERATE,
-        help=f"Total number of log lines to generate (default: {DEFAULT_LINES_TO_GENERATE})",
+        default=settings.default_lines_to_generate,
+        help=f"Total number of log lines to generate (default: {settings.default_lines_to_generate})",
     )
     parser.add_argument(
         "--output",
         type=str,
-        default=DEFAULT_OUTPUT_PATH,
-        help=f"Output file path (default: {DEFAULT_OUTPUT_PATH})",
+        default=settings.default_output_path,
+        help=f"Output file path (default: {settings.default_output_path})",
     )
     args = parser.parse_args()
 
