@@ -1,6 +1,16 @@
 from http import HTTPStatus
 
-HTTP_ENDPOINTS = [
+HTTP_ENDPOINTS: tuple[bytes, ...] = (
+    b"/wp-admin",
+    b"/wp-login",
+    b"/.env",
+    b"/config.",
+    b"/phpmyadmin",
+    b"/.git",
+    b"/etc/passwd",
+    b"/xmlrpc.php",
+    b"/actuator",
+    b"/admin",
     b"/",
     b"/login",
     b"/logout",
@@ -10,7 +20,7 @@ HTTP_ENDPOINTS = [
     b"/search",
     b"/upload",
     b"/download",
-]
+)
 HTTP_REFERERS = [
     b"https://www.google.com",
     b"https://www.bing.com",
@@ -35,11 +45,18 @@ ANOMALY_STATUS_CODES = [
     HTTPStatus.GATEWAY_TIMEOUT,
     HTTPStatus.UNAUTHORIZED,
 ]
-ANOMALY_ENDPOINTS = [
-    b"/login",
-    b"/upload",
-    b"/download",
-]
+ANOMALY_ENDPOINTS: tuple[bytes, ...] = (
+    b"/wp-admin",
+    b"/wp-login",
+    b"/.env",
+    b"/config.",
+    b"/phpmyadmin",
+    b"/.git",
+    b"/etc/passwd",
+    b"/xmlrpc.php",
+    b"/actuator",
+    b"/admin",
+)
 
 DEFAULT_LINES_TO_GENERATE = 1_000_000  # Number of log lines to generate
 DEFAULT_OUTPUT_PATH = "logs.txt"  # Default output file path

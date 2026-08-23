@@ -1,12 +1,8 @@
 import random
-from copy import replace
 
-from log_pipeline.generator.constants import (
-    ANOMALY_ENDPOINTS,
+from log_pipeline.constants import (
     ANOMALY_PROBABILITY,
-    ANOMALY_STATUS_CODES,
 )
-from log_pipeline.models.logs import LogLine
 
 
 def should_inject_anomaly() -> bool:
@@ -20,20 +16,3 @@ def should_inject_anomaly() -> bool:
         bool: True if an anomaly should be injected, False otherwise.
     """
     return random.random() < ANOMALY_PROBABILITY
-
-
-def inject_anomaly(log_line: LogLine) -> str:
-    """
-    Injects an anomaly into the given log line.
-
-    Args:
-        log_line (LogLine): The original log line.
-
-    Returns:
-        str: The log line with an injected anomaly.
-    """
-    anomaly_status = random.choice(ANOMALY_STATUS_CODES)
-    anomaly_endpoint = random.choice(ANOMALY_ENDPOINTS)
-    return str(
-        replace(log_line, http_status=anomaly_status, endpoint=anomaly_endpoint.value)
-    )

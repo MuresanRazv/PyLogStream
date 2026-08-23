@@ -8,8 +8,7 @@ from http import HTTPMethod
 from pathlib import Path
 
 from log_pipeline.benchmark.decorators import profile_performance
-from log_pipeline.generator.anomalies import should_inject_anomaly
-from log_pipeline.generator.constants import (
+from log_pipeline.constants import (
     ANOMALY_BATCH_SIZE,
     ANOMALY_ENDPOINTS,
     ANOMALY_STATUS_CODES,
@@ -18,6 +17,7 @@ from log_pipeline.generator.constants import (
     HTTP_REFERERS,
     HTTP_USER_AGENTS,
 )
+from log_pipeline.generator.anomalies import should_inject_anomaly
 
 # Standard endpoints and status codes for normal traffic
 STANDARD_ENDPOINTS = [
