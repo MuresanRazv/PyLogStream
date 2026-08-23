@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from log_pipeline.parser.log_parser import ChunkMetrics, LogParser, LogParserWorker
+from pylogstream.parser.log_parser import ChunkMetrics, LogParser, LogParserWorker
 
 
 def test_worker_parse_chunk_and_skip_malformed(tmp_path: Path) -> None:

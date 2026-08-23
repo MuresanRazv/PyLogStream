@@ -6,8 +6,8 @@ from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 from typing import Generic, TypeVar
 
-from log_pipeline.models.logs import LightweightLine
-from log_pipeline.parser.utils import find_byte_chunk_offsets
+from pylogstream.models.logs import LightweightLine
+from pylogstream.parser.utils import find_byte_chunk_offsets
 
 TChunkResult = TypeVar("TChunkResult")
 TFinalReport = TypeVar("TFinalReport")

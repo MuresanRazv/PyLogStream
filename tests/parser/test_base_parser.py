@@ -1,8 +1,8 @@
 from pathlib import Path
 
-from log_pipeline.models.logs import LightweightLine
-from log_pipeline.parser.base import BaseLogWorker
-from log_pipeline.parser.utils import find_byte_chunk_offsets
+from pylogstream.models.logs import LightweightLine
+from pylogstream.parser.base import BaseLogWorker
+from pylogstream.parser.utils import find_byte_chunk_offsets
 
 
 def test_base_worker_parse_line_valid() -> None:

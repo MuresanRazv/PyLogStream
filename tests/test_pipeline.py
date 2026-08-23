@@ -1,7 +1,7 @@
 from pathlib import Path
 
-from log_pipeline.generator.service import LogGenerator
-from log_pipeline.parser.log_parser import LogParser
+from pylogstream.generator.service import LogGenerator
+from pylogstream.parser.log_parser import LogParser
 
 
 def test_end_to_end_generate_and_parse_map_reduce(tmp_path: Path) -> None:

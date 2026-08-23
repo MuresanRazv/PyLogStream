@@ -7,8 +7,8 @@ from concurrent.futures import ProcessPoolExecutor
 from http import HTTPMethod
 from pathlib import Path
 
-from log_pipeline.benchmark.decorators import profile_performance
-from log_pipeline.constants import (
+from pylogstream.benchmark.decorators import profile_performance
+from pylogstream.constants import (
     ANOMALY_BATCH_SIZE,
     ANOMALY_ENDPOINTS,
     ANOMALY_STATUS_CODES,
@@ -17,7 +17,7 @@ from log_pipeline.constants import (
     HTTP_REFERERS,
     HTTP_USER_AGENTS,
 )
-from log_pipeline.generator.anomalies import should_inject_anomaly
+from pylogstream.generator.anomalies import should_inject_anomaly
 
 # Standard endpoints and status codes for normal traffic
 STANDARD_ENDPOINTS = [

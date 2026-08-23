@@ -1,9 +1,9 @@
 from collections import Counter
 from typing import NamedTuple
 
-from log_pipeline.benchmark.decorators import profile_performance
-from log_pipeline.models.logs import LightweightLine
-from log_pipeline.parser.base import BaseLogWorker, BaseParallelProcessor
+from pylogstream.benchmark.decorators import profile_performance
+from pylogstream.models.logs import LightweightLine
+from pylogstream.parser.base import BaseLogWorker, BaseParallelProcessor
 
 
 class ChunkMetrics(NamedTuple):

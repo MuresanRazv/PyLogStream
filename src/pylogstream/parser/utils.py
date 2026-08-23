@@ -1,13 +1,9 @@
 from datetime import datetime
 from pathlib import Path
 
-import pytz
-
 
 def parse_timestamp(timestamp_str: str) -> datetime:
-    return datetime.strptime(timestamp_str, "%d/%b/%Y:%H:%M:%S %z").replace(
-        tzinfo=pytz.utc
-    )
+    return datetime.strptime(timestamp_str, "%d/%b/%Y:%H:%M:%S %z")
 
 
 def find_byte_chunk_offsets(file_path: Path, num_chunks: int) -> list[tuple[int, int]]:

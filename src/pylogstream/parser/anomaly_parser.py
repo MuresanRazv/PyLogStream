@@ -2,11 +2,11 @@ from collections import Counter
 from pathlib import Path
 from typing import NamedTuple
 
-from log_pipeline.benchmark.decorators import profile_performance
-from log_pipeline.constants import ANOMALY_ENDPOINTS
-from log_pipeline.models.logs import LightweightLine
-from log_pipeline.parser.base import BaseLogWorker, BaseParallelProcessor
-from log_pipeline.parser.models import AnomalyScanResult, SuspiciousActor
+from pylogstream.benchmark.decorators import profile_performance
+from pylogstream.constants import ANOMALY_ENDPOINTS
+from pylogstream.models.logs import LightweightLine
+from pylogstream.parser.base import BaseLogWorker, BaseParallelProcessor
+from pylogstream.parser.models import AnomalyScanResult, SuspiciousActor
 
 
 class AnomalyChunkResult(NamedTuple):

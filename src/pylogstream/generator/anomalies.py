@@ -1,6 +1,6 @@
 import random
 
-from log_pipeline.constants import (
+from pylogstream.constants import (
     ANOMALY_PROBABILITY,
 )
 

@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from log_pipeline.parser.anomaly_parser import (
+from pylogstream.parser.anomaly_parser import (
     AnomalyChunkResult,
     AnomalyParser,
     AnomalyParserWorker,

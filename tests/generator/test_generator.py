@@ -1,4 +1,4 @@
-from log_pipeline.generator.service import LogGenerator
+from pylogstream.generator.service import LogGenerator
 
 
 def test_generator_service_writes_correct_line_count(tmp_path):
