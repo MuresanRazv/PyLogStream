@@ -172,7 +172,6 @@ class LogGenerator:
                 task.result()
 
         # Concatenate worker files into the final destination
-        print(self.output_path)
         with self.output_path.open("wb") as out_f:
             for chunk_file in chunk_files:
                 with chunk_file.open("rb") as in_f:
